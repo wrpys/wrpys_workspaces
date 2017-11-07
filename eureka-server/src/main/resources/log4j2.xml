@@ -14,7 +14,7 @@
             <Layout type="PatternLayout" pattern="${log.layout}"/>
         </Appender>
 		
-		<RollingFile name="all" fileName="${log.basedir}/eureka-server.log" filePattern="${log.basedir}/eureka-server-%d{yyyy-MM-dd}.%i.log" append="false">
+		<RollingFile name="all" fileName="${log.basedir}/eureka-server-all.log" filePattern="${log.basedir}/eureka-server-all-%d{yyyy-MM-dd}.%i.log" append="false">
 			<PatternLayout pattern="${log.layout}" />
 			<Policies>
 				<SizeBasedTriggeringPolicy size="${every_file_size}" />
