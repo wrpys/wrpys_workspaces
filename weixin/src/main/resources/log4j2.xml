@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration monitorInterval="1" status="ERROR" strict="true" name="LogConfig">
     <Properties>
-        <Property name="log.basedir">logs/gateway</Property>
+        <Property name="log.basedir">logs/weixin</Property>
 		<!--日志打印格式-->
         <Property name="log.layout">%d{ISO8601} | %-5.5p | %X{logtype} | %t | %X{codeline} | %l | %X{dealid} | %X{errorno} | %m%n</Property>
 		<!--日志切割的最小单位-->
@@ -14,7 +14,7 @@
             <Layout type="PatternLayout" pattern="${log.layout}"/>
         </Appender>
 		
-		<RollingFile name="all" fileName="${log.basedir}/taas-all.log" filePattern="${log.basedir}/taas-all-%d{yyyy-MM-dd}.%i.log" append="false">
+		<RollingFile name="all" fileName="${log.basedir}/weixin-all.log" filePattern="${log.basedir}/weixin-all-%d{yyyy-MM-dd}.%i.log" append="false">
 			<PatternLayout pattern="${log.layout}" />
 			<Policies>
 				<SizeBasedTriggeringPolicy size="${every_file_size}" />
@@ -23,7 +23,7 @@
 		</RollingFile>
         
 		<!--ERROR日志输出，包括(FATAL ERROR Exception)-->
-		<RollingFile name="errorRolling" fileName="${log.basedir}/taas-error.log" filePattern="${log.basedir}/taas-error-%d{yyyy-MM-dd}.%i.log">
+		<RollingFile name="errorRolling" fileName="${log.basedir}/weixin-error.log" filePattern="${log.basedir}/weixin-error-%d{yyyy-MM-dd}.%i.log">
 			<PatternLayout pattern="${log.layout}"/>
 			<SizeBasedTriggeringPolicy size="${every_file_size}"/>
 			<DefaultRolloverStrategy max="${max_size}"/>
@@ -58,7 +58,7 @@
 			</Routes>
 		</Routing>
 		
-		<RollingFile name="newland" fileName="${log.basedir}/taas-newland.log" filePattern="${log.basedir}/taas-newland-%d{yyyy-MM-dd}.%i.log" append="false">
+		<RollingFile name="newland" fileName="${log.basedir}/weixin.log" filePattern="${log.basedir}/weixin-%d{yyyy-MM-dd}.%i.log" append="false">
 			<PatternLayout pattern="${log.layout}" />
 			<Policies>
 				<SizeBasedTriggeringPolicy size="${every_file_size}" />
