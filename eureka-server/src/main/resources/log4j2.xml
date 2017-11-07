@@ -14,7 +14,7 @@
             <Layout type="PatternLayout" pattern="${log.layout}"/>
         </Appender>
 		
-		<RollingFile name="all" fileName="${log.basedir}/taas-all.log" filePattern="${log.basedir}/taas-all-%d{yyyy-MM-dd}.%i.log" append="false">
+		<RollingFile name="all" fileName="${log.basedir}/eureka-server.log" filePattern="${log.basedir}/eureka-server-%d{yyyy-MM-dd}.%i.log" append="false">
 			<PatternLayout pattern="${log.layout}" />
 			<Policies>
 				<SizeBasedTriggeringPolicy size="${every_file_size}" />
@@ -23,7 +23,7 @@
 		</RollingFile>
         
 		<!--ERROR日志输出，包括(FATAL ERROR Exception)-->
-		<RollingFile name="errorRolling" fileName="${log.basedir}/taas-error.log" filePattern="${log.basedir}/taas-error-%d{yyyy-MM-dd}.%i.log">
+		<RollingFile name="errorRolling" fileName="${log.basedir}/eureka-server-error.log" filePattern="${log.basedir}/eureka-server-error-%d{yyyy-MM-dd}.%i.log">
 			<PatternLayout pattern="${log.layout}"/>
 			<SizeBasedTriggeringPolicy size="${every_file_size}"/>
 			<DefaultRolloverStrategy max="${max_size}"/>
@@ -58,7 +58,7 @@
 			</Routes>
 		</Routing>
 		
-		<RollingFile name="newland" fileName="${log.basedir}/taas-newland.log" filePattern="${log.basedir}/taas-newland-%d{yyyy-MM-dd}.%i.log" append="false">
+		<RollingFile name="newland" fileName="${log.basedir}/eureka-server.log" filePattern="${log.basedir}/eureka-server-%d{yyyy-MM-dd}.%i.log" append="false">
 			<PatternLayout pattern="${log.layout}" />
 			<Policies>
 				<SizeBasedTriggeringPolicy size="${every_file_size}" />

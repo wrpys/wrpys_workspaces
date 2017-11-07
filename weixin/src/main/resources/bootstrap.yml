@@ -1,13 +1,13 @@
 spring:
   application:
-    name: gateway
+    name: weixin
   cloud:
     config:
       enabled: true
       discovery:
         enabled: true
         service-id: CONFIG-CENTER
-##############dev、test、demo、pro##################
+##############dev、pro##################
   profiles:
     active: dev
 
@@ -15,9 +15,9 @@ eureka:
   instance:
     non-secure-port: ${server.port:8091}
     prefer-ip-address: true
-    status-page-url-path: ${server.context-path}/info
-    health-check-url-path: ${server.context-path}/health
+#    status-page-url-path: ${server.context-path}/info
+#    health-check-url-path: ${server.context-path}/health
   client:
     service-url:
-      #defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka/
-      defaultZone: http://server1:8761/eureka/,http://server2:8761/eureka/,http://server3:8761/eureka/
+      defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka/
+#      defaultZone: http://server1:8761/eureka/,http://server2:8761/eureka/,http://server3:8761/eureka/
