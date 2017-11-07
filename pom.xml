@@ -15,6 +15,7 @@
         <module>pom</module>
         <module>eureka-server</module>
         <module>config-center</module>
+        <module>weixin</module>
     </modules>
 
 </project>
