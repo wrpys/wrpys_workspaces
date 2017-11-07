@@ -9,3 +9,5 @@ spring:
           password: wrp041527.
 server:
   port: 8888
+logging:
+  config: classpath:log4j2.xml
