@@ -1,2 +1,2 @@
-app:
-  name: weixin
+server:
+  port: 8091
