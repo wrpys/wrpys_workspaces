@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="1" status="ERROR" strict="true" name="LogConfig">
+    <Properties>
+        <Property name="log.basedir">logs/config-center</Property>
+		<!--日志打印格式-->
+        <Property name="log.layout">%d{ISO8601} | %-5.5p | %X{logtype} | %t | %X{codeline} | %l | %X{dealid} | %X{errorno} | %m%n</Property>
+		<!--日志切割的最小单位-->
+		<property name="every_file_size">100M</property>
+		<property name="max_size">10</property>
+    </Properties>
+    <Appenders>
+        <Appender type="Console" name="STDOUT">
+            <Target>SYSTEM_OUT</Target>
+            <Layout type="PatternLayout" pattern="${log.layout}"/>
+        </Appender>
+		
+		<RollingFile name="all" fileName="${log.basedir}/taas-all.log" filePattern="${log.basedir}/taas-all-%d{yyyy-MM-dd}.%i.log" append="false">
+			<PatternLayout pattern="${log.layout}" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="${every_file_size}" />
+			</Policies>
+			<DefaultRolloverStrategy max="${max_size}" />
+		</RollingFile>
+        
+		<!--ERROR日志输出，包括(FATAL ERROR Exception)-->
+		<RollingFile name="errorRolling" fileName="${log.basedir}/taas-error.log" filePattern="${log.basedir}/taas-error-%d{yyyy-MM-dd}.%i.log">
+			<PatternLayout pattern="${log.layout}"/>
+			<SizeBasedTriggeringPolicy size="${every_file_size}"/>
+			<DefaultRolloverStrategy max="${max_size}"/>
+			<Filters>
+				<RegexFilter regex=".*Exception.*" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+				<ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+			</Filters>
+		</RollingFile>
+		
+		<!--日志输出，按线程名称进行-->
+		<Routing name="allRolling">
+			<Routes pattern="$${ctx:ThreadName}">
+				<Route>
+					<RollingFile name="RollingFile-${ctx:ThreadName}" 
+						fileName="${log.basedir}/threadlog/${ctx:ThreadName}.log" 
+						filePattern="${log.basedir}/threadlog/${ctx:ThreadName}-%d{yyyy-MM-dd}.%i.log" append="false">
+						<PatternLayout pattern="${log.layout}"/>
+						<Policies>
+							<SizeBasedTriggeringPolicy size="${every_file_size}"/>
+						</Policies>
+						<DefaultRolloverStrategy max="${max_size}"/>
+						<Filters>
+							<ThresholdFilter level="fatal" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+							<ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+							<ThresholdFilter level="warn"  onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+							<ThresholdFilter level="info"  onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+							<ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+							<ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/>
+						</Filters>
+					</RollingFile>
+				</Route>
+			</Routes>
+		</Routing>
+		
+		<RollingFile name="newland" fileName="${log.basedir}/taas-newland.log" filePattern="${log.basedir}/taas-newland-%d{yyyy-MM-dd}.%i.log" append="false">
+			<PatternLayout pattern="${log.layout}" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="${every_file_size}" />
+			</Policies>
+			<DefaultRolloverStrategy max="${max_size}" />
+		</RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="STDOUT"/>
+            <AppenderRef ref="all"/>
+        </Root>
+		<Logger name="com.newland" level="debug" includeLocation="false">
+            <AppenderRef ref="allRolling"/>
+            <AppenderRef ref="newland"/>
+			<AppenderRef ref="errorRolling"/>
+		</Logger>
+    </Loggers>
+</Configuration>

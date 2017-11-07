@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: config-center
+  profiles:
+    active: native
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    non-secure-port: ${server.port:8888}
+    metadata-map:
+      instanceId: ${spring.application.name}:${random.value}
+  client:
+    service-url:
+      #defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka/
+      defaultZone: http://server1:8761/eureka/,http://server2:8761/eureka/,http://server3:8761/eureka/ #集群部署使用这个配置

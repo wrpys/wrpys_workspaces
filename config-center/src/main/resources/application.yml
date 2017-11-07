@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    config:
+      server:
+        native:
+          #search-locations: E:/job/newland/TAAS/Develop/SourceCode/Code/trunk/java/microservice-manager/config-center/src/main/resources/config  # 本地绝对路径 将本项目resources/config下的文件拷贝至此配置的目录
+          search-locations: classpath:config
+server:
+  port: 8888

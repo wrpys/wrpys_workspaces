@@ -1,0 +1,16 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  instance:
+    #prefer-ip-address: true
+    hostname: server1
+  client:
+    service-url:
+      defaultZone: http://server2:8761/eureka/,http://server3:8761/eureka/
+  server:
+    enable-self-preservation: false
