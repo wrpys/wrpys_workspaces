@@ -6,8 +6,9 @@ spring:
 
 eureka:
   instance:
-    prefer-ip-address: true
     non-secure-port: ${server.port:8888}
+    prefer-ip-address: true
+    ip-address: 18.220.242.178
     metadata-map:
       instanceId: ${spring.application.name}:${random.value}
   client:

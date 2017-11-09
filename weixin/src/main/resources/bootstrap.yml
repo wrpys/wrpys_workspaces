@@ -15,6 +15,7 @@ eureka:
   instance:
     non-secure-port: ${server.port:8091}
     prefer-ip-address: true
+    ip-address: 18.220.242.178
 #    status-page-url-path: ${server.context-path}/info
 #    health-check-url-path: ${server.context-path}/health
   client:
