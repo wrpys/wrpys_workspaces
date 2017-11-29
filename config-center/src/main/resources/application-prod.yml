@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: config-center
+  profiles:
+    active: git
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/wrpys/wrpys_workspaces
+          search-paths: config
+          username: 496732709@qq.com
+          password: wrp041527.
+server:
+  port: 8888
+logging:
+  config: classpath:log4j2.xml
+
+eureka:
+  instance:
+    non-secure-port: ${server.port:8888}
+    prefer-ip-address: true
+    ip-address: 18.220.242.178
+    metadata-map:
+      instanceId: ${spring.application.name}:${random.value}
+  client:
+    service-url:
+      defaultZone: http://server1:8761/eureka/,http://server2:8761/eureka/,http://server3:8761/eureka/ #集群部署使用这个配置

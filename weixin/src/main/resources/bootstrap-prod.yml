@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: weixin
+  cloud:
+    config:
+      enabled: true
+      discovery:
+        enabled: true
+        service-id: CONFIG-CENTER
+
+eureka:
+  instance:
+    non-secure-port: ${server.port:8091}
+    prefer-ip-address: true
+    ip-address: 18.220.242.178
+#    status-page-url-path: ${server.context-path}/info
+#    health-check-url-path: ${server.context-path}/health
+  client:
+    service-url:
+      defaultZone: http://server1:8761/eureka/,http://server2:8761/eureka/,http://server3:8761/eureka/

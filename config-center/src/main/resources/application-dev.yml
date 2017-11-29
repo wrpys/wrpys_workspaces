@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: config-center
+  profiles:
+    active: git
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/wrpys/wrpys_workspaces
+          search-paths: config
+          username: 496732709@qq.com
+          password: wrp041527.
+server:
+  port: 8888
+logging:
+  config: classpath:log4j2.xml
+
+eureka:
+  instance:
+    non-secure-port: ${server.port:8888}
+    metadata-map:
+      instanceId: ${spring.application.name}:${random.value}
+  client:
+    service-url:
+      defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka/
