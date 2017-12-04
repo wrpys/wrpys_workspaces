@@ -15,9 +15,13 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import javax.servlet.http.HttpServletRequest;
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,8 +101,8 @@ public class MessageUtil {
      * @throws IOException
      * @throws DocumentException
      */
-    public static Map<String, String> xmlToMap(HttpServletRequest request) throws IOException, DocumentException {
-        Map<String, String> map = new HashMap<>();
+    public static Map<String, Object> xmlToMap(HttpServletRequest request) throws IOException, DocumentException {
+        Map<String, Object> map = new HashMap<>();
 
         SAXReader reader = new SAXReader();
         InputStream ins = request.getInputStream();
@@ -110,6 +114,33 @@ public class MessageUtil {
         }
         ins.close();
         return map;
+    }
+
+    /**
+     * map转bean
+     *
+     * @param map
+     * @param obj
+     * @return
+     * @throws Exception
+     */
+    public static void mapToObject(Map<String, Object> map, Object obj) {
+        try {
+            BeanInfo beanInfo = Introspector.getBeanInfo(obj.getClass());
+            PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+            for (PropertyDescriptor property : propertyDescriptors) {
+                String key = property.getName();
+                String field = key.substring(0, 1).toUpperCase() + key.substring(1);
+                if (map.containsKey(field)) {
+                    Object value = map.get(key);
+                    // 得到property对应的setter方法
+                    Method setter = property.getWriteMethod();
+                    setter.invoke(obj, value);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -154,10 +185,12 @@ public class MessageUtil {
             return new PrettyPrintWriter(out) {
                 // 对所有xml节点的转换都增加CDATA标记
                 boolean cdata = true;
+
                 @SuppressWarnings("unchecked")
                 public void startNode(String name, Class clazz) {
                     super.startNode(name, clazz);
                 }
+
                 protected void writeText(QuickWriter writer, String text) {
                     if (cdata) {
                         writer.write("<![CDATA[");

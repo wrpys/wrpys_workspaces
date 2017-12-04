@@ -1,6 +1,8 @@
 package com.wrpys.app.wx.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.wrpys.app.wx.dao.ReqTextMessageDao;
+import com.wrpys.app.wx.model.ReqTextMessage;
 import com.wrpys.app.wx.model.resp.Article;
 import com.wrpys.app.wx.model.resp.NewsMessage;
 import com.wrpys.app.wx.model.resp.TextMessage;
@@ -8,6 +10,7 @@ import com.wrpys.app.wx.service.CoreService;
 import com.wrpys.app.wx.utils.MessageUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +29,9 @@ public class CoreServiceImpl implements CoreService {
 
     private static final Logger log = LoggerFactory.getLogger(CoreServiceImpl.class);
 
+    @Autowired
+    private ReqTextMessageDao reqTextMessageDao;
+
     public String processRequest(HttpServletRequest request) {
         String respMessage = null;
         try {
@@ -33,15 +39,15 @@ public class CoreServiceImpl implements CoreService {
             String respContent = "请求处理异常，请稍候尝试！";
 
             // xml请求解析
-            Map<String, String> requestMap = MessageUtil.xmlToMap(request);
+            Map<String, Object> requestMap = MessageUtil.xmlToMap(request);
             log.info("CoreServiceImpl.processRequest===requestMap:" + JSON.toJSONString(requestMap));
 
             // 发送方帐号（open_id）
-            String fromUserName = requestMap.get("FromUserName");
+            String fromUserName = (String) requestMap.get("FromUserName");
             // 公众帐号
-            String toUserName = requestMap.get("ToUserName");
+            String toUserName = (String) requestMap.get("ToUserName");
             // 消息类型
-            String msgType = requestMap.get("MsgType");
+            String msgType = (String) requestMap.get("MsgType");
 
             // 回复文本消息
             TextMessage textMessage = new TextMessage();
@@ -54,7 +60,12 @@ public class CoreServiceImpl implements CoreService {
             // 文本消息
             if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT)) {
 
-                String content = requestMap.get("Content");
+                ReqTextMessage reqTextMessage = new ReqTextMessage();
+                MessageUtil.mapToObject(requestMap, reqTextMessage);
+                log.info(JSON.toJSONString(reqTextMessage));
+                reqTextMessageDao.insert(reqTextMessage);
+
+                String content = (String) requestMap.get("Content");
                 if ("图片".equals(content)) {
                     NewsMessage newsMessage = new NewsMessage();
                     newsMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
@@ -129,7 +140,7 @@ public class CoreServiceImpl implements CoreService {
             // 事件推送
             else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT)) {
                 // 事件类型
-                String eventType = requestMap.get("Event");
+                String eventType = (String) requestMap.get("Event");
                 // 订阅
                 if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
                     respContent = "谢谢您的关注！";
