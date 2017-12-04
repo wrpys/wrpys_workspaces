@@ -58,7 +58,7 @@
 			</Routes>
 		</Routing>
 		
-		<RollingFile name="newland" fileName="${log.basedir}/config-center.log" filePattern="${log.basedir}/config-center-%d{yyyy-MM-dd}.%i.log" append="false">
+		<RollingFile name="wrpys" fileName="${log.basedir}/config-center.log" filePattern="${log.basedir}/config-center-%d{yyyy-MM-dd}.%i.log" append="false">
 			<PatternLayout pattern="${log.layout}" />
 			<Policies>
 				<SizeBasedTriggeringPolicy size="${every_file_size}" />
@@ -68,13 +68,13 @@
     </Appenders>
 
     <Loggers>
-        <Root level="info">
+        <Root level="debug">
             <AppenderRef ref="STDOUT"/>
             <AppenderRef ref="all"/>
         </Root>
-		<Logger name="com.newland" level="debug" includeLocation="false">
+		<Logger name="com.wrpys" level="debug" includeLocation="false">
             <AppenderRef ref="allRolling"/>
-            <AppenderRef ref="newland"/>
+            <AppenderRef ref="wrpys"/>
 			<AppenderRef ref="errorRolling"/>
 		</Logger>
     </Loggers>
