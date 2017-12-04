@@ -1,2 +1,12 @@
 profiles:
   active: prod
+
+server:
+  port: 8091
+
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/weixin
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
