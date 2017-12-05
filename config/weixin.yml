@@ -1,17 +1,17 @@
 server:
   port: 8091
 
-#spring:
-#  datasource:
-#    url: jdbc:mysql://127.0.0.1:3306/weixin_dev
-#    username: root
-#    password: 123456
-#    driver-class-name: com.mysql.jdbc.Driver
-#
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/weixin_dev
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+
 #logging:
 #  config: classpath:log4j2.xml
-#
-#mybatis:
-#  mapper-locations: classpath:com/wrpys/app/wx/model/mapper/*.xml
-#pagehelper:
-#  helper-dialect: mysql
+
+mybatis:
+  mapper-locations: classpath:com/wrpys/app/wx/model/mapper/*.xml
+pagehelper:
+  helper-dialect: mysql
