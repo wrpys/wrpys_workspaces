@@ -1,12 +1,12 @@
 spring:
   application:
     name: weixin
-#  cloud:
-#    config:
-#      enabled: true
-#      discovery:
-#        enabled: true
-#        service-id: CONFIG-CENTER
+  cloud:
+    config:
+      enabled: true
+      discovery:
+        enabled: true
+        service-id: CONFIG-CENTER
 
 eureka:
   instance:

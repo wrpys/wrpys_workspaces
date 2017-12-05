@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,8 +102,8 @@ public class MessageUtil {
      * @throws IOException
      * @throws DocumentException
      */
-    public static Map<String, Object> xmlToMap(HttpServletRequest request) throws IOException, DocumentException {
-        Map<String, Object> map = new HashMap<>();
+    public static Map<String, String> xmlToMap(HttpServletRequest request) throws IOException, DocumentException {
+        Map<String, String> map = new HashMap<>();
 
         SAXReader reader = new SAXReader();
         InputStream ins = request.getInputStream();
@@ -124,18 +125,35 @@ public class MessageUtil {
      * @return
      * @throws Exception
      */
-    public static void mapToObject(Map<String, Object> map, Object obj) {
+    public static void mapToObject(Map<String, String> map, Object obj) {
         try {
             BeanInfo beanInfo = Introspector.getBeanInfo(obj.getClass());
             PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
             for (PropertyDescriptor property : propertyDescriptors) {
                 String key = property.getName();
-                String field = key.substring(0, 1).toUpperCase() + key.substring(1);
-                if (map.containsKey(field)) {
-                    Object value = map.get(key);
+                key = key.substring(0, 1).toUpperCase() + key.substring(1);
+                if (map.containsKey(key)) {
+                    String value = map.get(key);
                     // 得到property对应的setter方法
                     Method setter = property.getWriteMethod();
-                    setter.invoke(obj, value);
+                    Type[] types = setter.getGenericParameterTypes();
+                    String typeName = types[0].getTypeName();
+                    Object args = null;
+                    switch (typeName) {
+                        case "java.lang.String":
+                            args = value;
+                            break;
+                        case "java.lang.Long":
+                            args = Long.valueOf(value);
+                            break;
+                        case "long":
+                            args = Long.valueOf(value).longValue();
+                            break;
+                        case "int":
+                            args = Integer.valueOf(value).intValue();
+                            break;
+                    }
+                    setter.invoke(obj, args);
                 }
             }
         } catch (Exception e) {

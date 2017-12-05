@@ -10,11 +10,11 @@ public class MusicMessage extends BaseMessage {
     // 音乐
     private Music Music;
 
-    public com.wrpys.app.wx.model.resp.Music getMusic() {
+    public Music getMusic() {
         return Music;
     }
 
-    public void setMusic(com.wrpys.app.wx.model.resp.Music music) {
+    public void setMusic(Music music) {
         Music = music;
     }
 }

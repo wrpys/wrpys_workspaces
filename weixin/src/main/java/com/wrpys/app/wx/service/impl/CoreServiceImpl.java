@@ -39,15 +39,15 @@ public class CoreServiceImpl implements CoreService {
             String respContent = "请求处理异常，请稍候尝试！";
 
             // xml请求解析
-            Map<String, Object> requestMap = MessageUtil.xmlToMap(request);
+            Map<String, String> requestMap = MessageUtil.xmlToMap(request);
             log.info("CoreServiceImpl.processRequest===requestMap:" + JSON.toJSONString(requestMap));
 
             // 发送方帐号（open_id）
-            String fromUserName = (String) requestMap.get("FromUserName");
+            String fromUserName = requestMap.get("FromUserName");
             // 公众帐号
-            String toUserName = (String) requestMap.get("ToUserName");
+            String toUserName = requestMap.get("ToUserName");
             // 消息类型
-            String msgType = (String) requestMap.get("MsgType");
+            String msgType = requestMap.get("MsgType");
 
             // 回复文本消息
             TextMessage textMessage = new TextMessage();
@@ -62,10 +62,10 @@ public class CoreServiceImpl implements CoreService {
 
                 ReqTextMessage reqTextMessage = new ReqTextMessage();
                 MessageUtil.mapToObject(requestMap, reqTextMessage);
-                log.info(JSON.toJSONString(reqTextMessage));
+                log.info("reqTextMessage:" + JSON.toJSONString(reqTextMessage));
                 reqTextMessageDao.insert(reqTextMessage);
 
-                String content = (String) requestMap.get("Content");
+                String content = requestMap.get("Content");
                 if ("图片".equals(content)) {
                     NewsMessage newsMessage = new NewsMessage();
                     newsMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
@@ -140,7 +140,7 @@ public class CoreServiceImpl implements CoreService {
             // 事件推送
             else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT)) {
                 // 事件类型
-                String eventType = (String) requestMap.get("Event");
+                String eventType = requestMap.get("Event");
                 // 订阅
                 if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
                     respContent = "谢谢您的关注！";
@@ -160,6 +160,7 @@ public class CoreServiceImpl implements CoreService {
             log.error("异常", e);
         }
         return respMessage;
+
     }
 
 }
