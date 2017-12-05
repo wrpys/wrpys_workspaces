@@ -1,0 +1,3 @@
+ngrok http 8080
+
+ngrok -config ngrok.cfg -subdomain example 8080
