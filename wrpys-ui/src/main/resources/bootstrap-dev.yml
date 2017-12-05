@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: wrpys-ui
+  cloud:
+    config:
+      enabled: true
+      discovery:
+        enabled: true
+        service-id: CONFIG-CENTER
+
+eureka:
+  instance:
+    non-secure-port: ${server.port:8092}
+#    status-page-url-path: ${server.context-path}/info
+#    health-check-url-path: ${server.context-path}/health
+  client:
+    service-url:
+      defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka/

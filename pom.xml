@@ -15,7 +15,9 @@
         <module>pom</module>
         <module>eureka-server</module>
         <module>config-center</module>
+        <module>dataaccess-vo</module>
         <module>weixin</module>
+        <module>wrpys-ui</module>
     </modules>
 
 </project>
