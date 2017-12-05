@@ -8,8 +8,8 @@ spring:
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
 
-#logging:
-#  config: classpath:log4j2.xml
+logging:
+  config: classpath:log4j2.xml
 
 mybatis:
   mapper-locations: classpath:com/wrpys/app/wx/model/mapper/*.xml
