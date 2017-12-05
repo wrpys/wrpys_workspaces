@@ -2,7 +2,7 @@ profiles:
   active: prod
 
 server:
-  port: 9092
+  port: 8092
 
 spring:
   datasource:
