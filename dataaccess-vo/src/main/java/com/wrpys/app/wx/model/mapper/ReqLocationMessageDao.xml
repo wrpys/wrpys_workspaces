@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wrpys.app.wx.dao.ReqLocationMessageDao" >
+  <resultMap id="BaseResultMap" type="com.wrpys.app.wx.model.ReqLocationMessage" >
+    <id column="req_location_message_id" property="reqLocationMessageId" jdbcType="INTEGER" />
+    <result column="to_user_name" property="ToUserName" jdbcType="VARCHAR" />
+    <result column="from_user_name" property="FromUserName" jdbcType="VARCHAR" />
+    <result column="create_time" property="CreateTime" jdbcType="INTEGER" />
+    <result column="msg_type" property="MsgType" jdbcType="VARCHAR" />
+    <result column="msg_id" property="MsgId" jdbcType="VARCHAR" />
+    <result column="location_x" property="Location_X" jdbcType="VARCHAR" />
+    <result column="location_y" property="Location_Y" jdbcType="VARCHAR" />
+    <result column="scale" property="Scale" jdbcType="VARCHAR" />
+    <result column="label" property="Label" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    req_location_message_id, to_user_name, from_user_name, create_time, msg_type, msg_id, 
+    location_x, location_y, scale, label
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from req_location_message
+    where req_location_message_id = #{reqLocationMessageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from req_location_message
+    where req_location_message_id = #{reqLocationMessageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wrpys.app.wx.model.ReqLocationMessage" >
+    insert into req_location_message (req_location_message_id, to_user_name, 
+      from_user_name, create_time, msg_type, 
+      msg_id, location_x, location_y, 
+      scale, label)
+    values (#{reqLocationMessageId,jdbcType=INTEGER}, #{ToUserName,jdbcType=VARCHAR}, 
+      #{FromUserName,jdbcType=VARCHAR}, #{CreateTime,jdbcType=INTEGER}, #{MsgType,jdbcType=VARCHAR}, 
+      #{MsgId,jdbcType=VARCHAR}, #{Location_X,jdbcType=VARCHAR}, #{Location_Y,jdbcType=VARCHAR}, 
+      #{Scale,jdbcType=VARCHAR}, #{Label,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wrpys.app.wx.model.ReqLocationMessage" >
+    insert into req_location_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reqLocationMessageId != null" >
+        req_location_message_id,
+      </if>
+      <if test="ToUserName != null" >
+        to_user_name,
+      </if>
+      <if test="FromUserName != null" >
+        from_user_name,
+      </if>
+      <if test="CreateTime != null" >
+        create_time,
+      </if>
+      <if test="MsgType != null" >
+        msg_type,
+      </if>
+      <if test="MsgId != null" >
+        msg_id,
+      </if>
+      <if test="Location_X != null" >
+        location_x,
+      </if>
+      <if test="Location_Y != null" >
+        location_y,
+      </if>
+      <if test="Scale != null" >
+        scale,
+      </if>
+      <if test="Label != null" >
+        label,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reqLocationMessageId != null" >
+        #{reqLocationMessageId,jdbcType=INTEGER},
+      </if>
+      <if test="ToUserName != null" >
+        #{ToUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="FromUserName != null" >
+        #{FromUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="CreateTime != null" >
+        #{CreateTime,jdbcType=INTEGER},
+      </if>
+      <if test="MsgType != null" >
+        #{MsgType,jdbcType=VARCHAR},
+      </if>
+      <if test="MsgId != null" >
+        #{MsgId,jdbcType=VARCHAR},
+      </if>
+      <if test="Location_X != null" >
+        #{Location_X,jdbcType=VARCHAR},
+      </if>
+      <if test="Location_Y != null" >
+        #{Location_Y,jdbcType=VARCHAR},
+      </if>
+      <if test="Scale != null" >
+        #{Scale,jdbcType=VARCHAR},
+      </if>
+      <if test="Label != null" >
+        #{Label,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wrpys.app.wx.model.ReqLocationMessage" >
+    update req_location_message
+    <set >
+      <if test="ToUserName != null" >
+        to_user_name = #{ToUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="FromUserName != null" >
+        from_user_name = #{FromUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="CreateTime != null" >
+        create_time = #{CreateTime,jdbcType=INTEGER},
+      </if>
+      <if test="MsgType != null" >
+        msg_type = #{MsgType,jdbcType=VARCHAR},
+      </if>
+      <if test="MsgId != null" >
+        msg_id = #{MsgId,jdbcType=VARCHAR},
+      </if>
+      <if test="Location_X != null" >
+        location_x = #{Location_X,jdbcType=VARCHAR},
+      </if>
+      <if test="Location_Y != null" >
+        location_y = #{Location_Y,jdbcType=VARCHAR},
+      </if>
+      <if test="Scale != null" >
+        scale = #{Scale,jdbcType=VARCHAR},
+      </if>
+      <if test="Label != null" >
+        label = #{Label,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where req_location_message_id = #{reqLocationMessageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wrpys.app.wx.model.ReqLocationMessage" >
+    update req_location_message
+    set to_user_name = #{ToUserName,jdbcType=VARCHAR},
+      from_user_name = #{FromUserName,jdbcType=VARCHAR},
+      create_time = #{CreateTime,jdbcType=INTEGER},
+      msg_type = #{MsgType,jdbcType=VARCHAR},
+      msg_id = #{MsgId,jdbcType=VARCHAR},
+      location_x = #{Location_X,jdbcType=VARCHAR},
+      location_y = #{Location_Y,jdbcType=VARCHAR},
+      scale = #{Scale,jdbcType=VARCHAR},
+      label = #{Label,jdbcType=VARCHAR}
+    where req_location_message_id = #{reqLocationMessageId,jdbcType=INTEGER}
+  </update>
+</mapper>
