@@ -56,6 +56,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.wrpys.app</groupId>
+            <artifactId>dataaccess-vo</artifactId>
+            <version>${wrpys.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
