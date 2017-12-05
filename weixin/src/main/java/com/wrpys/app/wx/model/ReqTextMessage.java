@@ -4,7 +4,7 @@ import com.wrpys.app.wx.model.req.TextMessage;
 
 /**
  * @author wrp
- * @Description 文本消息 db
+ * @Description db
  * @Date 2017/12/4
  */
 public class ReqTextMessage extends TextMessage {

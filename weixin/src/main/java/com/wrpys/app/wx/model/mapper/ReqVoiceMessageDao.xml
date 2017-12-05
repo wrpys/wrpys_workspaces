@@ -1,47 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wrpys.app.wx.dao.ReqTextMessageDao" >
-  <resultMap id="BaseResultMap" type="com.wrpys.app.wx.model.ReqTextMessage" >
-    <id column="req_text_message_id" property="reqTextMessageId" jdbcType="INTEGER" />
+<mapper namespace="com.wrpys.app.wx.dao.ReqVoiceMessageDao" >
+  <resultMap id="BaseResultMap" type="com.wrpys.app.wx.model.ReqVoiceMessage" >
+    <id column="req_voice_message_id" property="reqVoiceMessageId" jdbcType="INTEGER" />
     <result column="to_user_name" property="ToUserName" jdbcType="VARCHAR" />
     <result column="from_user_name" property="FromUserName" jdbcType="VARCHAR" />
     <result column="create_time" property="CreateTime" jdbcType="INTEGER" />
     <result column="msg_type" property="MsgType" jdbcType="VARCHAR" />
     <result column="msg_id" property="MsgId" jdbcType="VARCHAR" />
-    <result column="content" property="Content" jdbcType="VARCHAR" />
+    <result column="media_id" property="MediaId" jdbcType="VARCHAR" />
+    <result column="format" property="Format" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    req_text_message_id, to_user_name, from_user_name, create_time, msg_type, msg_id, 
-    content
+    req_voice_message_id, to_user_name, from_user_name, create_time, msg_type, msg_id, 
+    media_id, format
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from req_text_message
-    where req_text_message_id = #{reqTextMessageId,jdbcType=INTEGER}
+    from req_voice_message
+    where req_voice_message_id = #{reqVoiceMessageId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from req_text_message
-    where req_text_message_id = #{reqTextMessageId,jdbcType=INTEGER}
+    delete from req_voice_message
+    where req_voice_message_id = #{reqVoiceMessageId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.wrpys.app.wx.model.ReqTextMessage" >
-    insert into req_text_message (req_text_message_id, to_user_name, from_user_name, 
+  <insert id="insert" parameterType="com.wrpys.app.wx.model.ReqVoiceMessage" >
+    insert into req_voice_message (req_voice_message_id, to_user_name, from_user_name, 
       create_time, msg_type, msg_id, 
-      content)
-    values (#{reqTextMessageId,jdbcType=INTEGER}, #{ToUserName,jdbcType=VARCHAR}, #{FromUserName,jdbcType=VARCHAR},
-      #{CreateTime,jdbcType=INTEGER}, #{MsgType,jdbcType=VARCHAR}, #{MsgId,jdbcType=VARCHAR},
-      #{Content,jdbcType=VARCHAR})
+      media_id, format)
+    values (#{reqVoiceMessageId,jdbcType=INTEGER}, #{ToUserName,jdbcType=VARCHAR}, #{FromUserName,jdbcType=VARCHAR}, 
+      #{CreateTime,jdbcType=INTEGER}, #{MsgType,jdbcType=VARCHAR}, #{MsgId,jdbcType=VARCHAR}, 
+      #{MediaId,jdbcType=VARCHAR}, #{Format,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.wrpys.app.wx.model.ReqTextMessage" >
-    insert into req_text_message
+  <insert id="insertSelective" parameterType="com.wrpys.app.wx.model.ReqVoiceMessage" >
+    insert into req_voice_message
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="reqTextMessageId != null" >
-        req_text_message_id,
+      <if test="reqVoiceMessageId != null" >
+        req_voice_message_id,
       </if>
       <if test="ToUserName != null" >
         to_user_name,
       </if>
-      <if test="FoUserName != null" >
+      <if test="FromUserName != null" >
         from_user_name,
       </if>
       <if test="CreateTime != null" >
@@ -53,13 +54,16 @@
       <if test="MsgId != null" >
         msg_id,
       </if>
-      <if test="Content != null" >
-        Content,
+      <if test="MediaId != null" >
+        media_id,
+      </if>
+      <if test="Format != null" >
+        format,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="reqTextMessageId != null" >
-        #{reqTextMessageId,jdbcType=INTEGER},
+      <if test="reqVoiceMessageId != null" >
+        #{reqVoiceMessageId,jdbcType=INTEGER},
       </if>
       <if test="ToUserName != null" >
         #{ToUserName,jdbcType=VARCHAR},
@@ -76,13 +80,16 @@
       <if test="MsgId != null" >
         #{MsgId,jdbcType=VARCHAR},
       </if>
-      <if test="Content != null" >
-        #{Content,jdbcType=VARCHAR},
+      <if test="MediaId != null" >
+        #{MediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="Format != null" >
+        #{Format,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wrpys.app.wx.model.ReqTextMessage" >
-    update req_text_message
+  <update id="updateByPrimaryKeySelective" parameterType="com.wrpys.app.wx.model.ReqVoiceMessage" >
+    update req_voice_message
     <set >
       <if test="ToUserName != null" >
         to_user_name = #{ToUserName,jdbcType=VARCHAR},
@@ -99,20 +106,24 @@
       <if test="MsgId != null" >
         msg_id = #{MsgId,jdbcType=VARCHAR},
       </if>
-      <if test="Content != null" >
-        content = #{Content,jdbcType=VARCHAR},
+      <if test="MediaId != null" >
+        media_id = #{MediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="Format != null" >
+        format = #{Format,jdbcType=VARCHAR},
       </if>
     </set>
-    where req_text_message_id = #{reqTextMessageId,jdbcType=INTEGER}
+    where req_voice_message_id = #{reqVoiceMessageId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.wrpys.app.wx.model.ReqTextMessage" >
-    update req_text_message
+  <update id="updateByPrimaryKey" parameterType="com.wrpys.app.wx.model.ReqVoiceMessage" >
+    update req_voice_message
     set to_user_name = #{ToUserName,jdbcType=VARCHAR},
       from_user_name = #{FromUserName,jdbcType=VARCHAR},
       create_time = #{CreateTime,jdbcType=INTEGER},
       msg_type = #{MsgType,jdbcType=VARCHAR},
       msg_id = #{MsgId,jdbcType=VARCHAR},
-      content = #{Content,jdbcType=VARCHAR}
-    where req_text_message_id = #{reqTextMessageId,jdbcType=INTEGER}
+      media_id = #{MediaId,jdbcType=VARCHAR},
+      format = #{Format,jdbcType=VARCHAR}
+    where req_voice_message_id = #{reqVoiceMessageId,jdbcType=INTEGER}
   </update>
 </mapper>
