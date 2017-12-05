@@ -10,16 +10,15 @@ import java.util.Arrays;
  */
 public class CheckUtil {
 
-    private static final String token = "wrpys_weixin";
-
     /**
      * 验证消息的确来自微信服务器
+     *
      * @param signature
      * @param timestamp
      * @param nonce
      * @return
      */
-    public static boolean checkSignature(String signature, String timestamp, String nonce) {
+    public static boolean checkSignature(String signature, String timestamp, String nonce, String token) {
         String[] arr = new String[]{token, timestamp, nonce};
         // 排序
         Arrays.sort(arr);

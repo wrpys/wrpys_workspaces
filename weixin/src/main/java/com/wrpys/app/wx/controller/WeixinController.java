@@ -5,6 +5,7 @@ import com.wrpys.app.wx.utils.CheckUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,9 @@ public class WeixinController {
     @Autowired
     private CoreService coreService;
 
+    @Value("${weixin.token}")
+    private String token;
+
     /**
      * 确认请求来自微信服务器
      *
@@ -44,7 +48,7 @@ public class WeixinController {
         String echostr = request.getParameter("echostr");
         log.info("weixin.get===signature:" + signature + ",timestamp:" + timestamp + ",nonce:" + nonce + ",echostr:" + echostr);
         PrintWriter out = response.getWriter();
-        if (CheckUtil.checkSignature(signature, timestamp, nonce)) {
+        if (CheckUtil.checkSignature(signature, timestamp, nonce, token)) {
             out.print(echostr);
         }
         if (out != null) out.close();

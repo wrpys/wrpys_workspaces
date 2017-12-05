@@ -79,7 +79,7 @@ public class TextMessageHandleServiceImpl implements MessageHandleService {
             article.setDescription("某网友吃冰激凌吃出一条真蛇，他真的很无耻！");
             articles.add(article);
 
-            String baseUrl = "http://5aa06d97.ngrok.io";
+            String baseUrl = "http://fdf2f3b7.ngrok.io";
             article = new Article();
             article.setTitle("wrpys");
             article.setUrl(baseUrl + "/index");
