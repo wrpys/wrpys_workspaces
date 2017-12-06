@@ -6,7 +6,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/wrpysui
+    url: jdbc:mysql://127.0.0.1:3306/wrpys
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
