@@ -1,8 +1,11 @@
 /**
  * Created by wrp on 2017/12/6.
  */
-layui.use(['common', 'table'], function () {
-    var table = layui.table;
+layui.use(['common', 'table', 'layer'], function () {
+    var table = layui.table,
+        layer = layui.layer;
+
+    layer.msg("hello");
 
     table.render({
         elem: '#tableObj'
