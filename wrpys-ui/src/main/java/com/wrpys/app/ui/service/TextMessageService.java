@@ -1,5 +1,7 @@
 package com.wrpys.app.ui.service;
 
+import com.wrpys.app.common.PageBean;
+import com.wrpys.app.vo.PageParamBean;
 import com.wrpys.app.wx.model.ReqTextMessage;
 
 import java.util.List;
@@ -11,6 +13,6 @@ import java.util.List;
  */
 public interface TextMessageService {
 
-    List<ReqTextMessage> findTextMessage(ReqTextMessage reqTextMessage);
+    PageBean findTextMessage(PageParamBean<ReqTextMessage> pageParam);
 
 }

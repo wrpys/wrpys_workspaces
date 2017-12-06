@@ -74,6 +74,11 @@
             <artifactId>dataaccess-vo</artifactId>
             <version>${wrpys.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.wrpys.app</groupId>
+            <artifactId>spring-boot-common</artifactId>
+            <version>${wrpys.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>

@@ -13,6 +13,7 @@
 
     <modules>
         <module>pom</module>
+        <module>spring-boot-common</module>
         <module>eureka-server</module>
         <module>config-center</module>
         <module>dataaccess-vo</module>

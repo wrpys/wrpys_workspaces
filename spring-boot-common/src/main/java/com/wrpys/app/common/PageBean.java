@@ -55,4 +55,9 @@ public class PageBean {
     public void setData(List<?> data) {
         this.data = data;
     }
+
+    public static PageBean build(String code, String msg, Long count, List<?> data) {
+        return new PageBean(code, msg, count, data);
+    }
+
 }
