@@ -8,6 +8,6 @@ logging:
   config: classpath:log4j2.xml
 
 mybatis:
-  mapper-locations: classpath:com/wrpys/app/ui/model/mapper/*.xml
+  mapper-locations: classpath:com/wrpys/app/**/model/mapper/*.xml
 pagehelper:
   helper-dialect: mysql
