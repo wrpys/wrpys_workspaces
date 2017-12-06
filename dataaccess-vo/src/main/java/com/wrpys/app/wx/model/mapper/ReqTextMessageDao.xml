@@ -115,4 +115,12 @@
       content = #{Content,jdbcType=VARCHAR}
     where req_text_message_id = #{reqTextMessageId,jdbcType=INTEGER}
   </update>
+
+  <select id="findTextMessageByParams" resultMap="BaseResultMap" parameterType="com.wrpys.app.wx.model.ReqTextMessage" >
+    select
+    <include refid="Base_Column_List" />
+    from req_text_message
+    where from_user_name = #{FromUserName,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

@@ -3,6 +3,7 @@ package com.wrpys.app.ui;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -10,7 +11,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @Date 2017/12/01
  */
 @SpringBootApplication
-@MapperScan(basePackages = {"com.wrpys.app.ui.dao"})
+@EnableEurekaClient
+@MapperScan(basePackages = {"com.wrpys.app.**.dao"})
 @EnableTransactionManagement
 public class WrpysUiApplication {
 
