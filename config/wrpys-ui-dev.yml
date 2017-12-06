@@ -3,6 +3,9 @@ profiles:
 
 server:
   port: 8092
+  jsp-servlet:
+      init-parameters:
+        development: true
 
 spring:
   datasource:
