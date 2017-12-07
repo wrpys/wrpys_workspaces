@@ -1,5 +1,6 @@
 <%
     String contentPath = request.getContextPath();
+    String randomStr = "?currTime=" + new Date().getTime();
 %>
 <script>
     var contentPath = "<%=contentPath%>";
