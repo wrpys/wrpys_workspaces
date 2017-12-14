@@ -26,6 +26,7 @@ public class CoreServiceImpl implements CoreService {
     @Autowired
     private MessageHandleFactory messageHandleFactory;
 
+    @Override
     public String processRequest(HttpServletRequest request) {
         String respMsg = null;
         try {

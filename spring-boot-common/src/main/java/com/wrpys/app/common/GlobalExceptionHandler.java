@@ -24,12 +24,12 @@ import java.sql.SQLException;
 public class GlobalExceptionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-    private static final String tag = "GlobalExceptionHandler===";
+    private static final String TAG = "GlobalExceptionHandler===";
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResponseEntity defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
-        logger.error(tag, e);
+        logger.error(TAG, e);
         ResponseHeaderVo responseHeaderVo = null;
         Class eClazz = Exception.class;
         // 异常为SQLException或者SQLException的子类

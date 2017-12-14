@@ -13,11 +13,13 @@ public class ErrorMsg {
         StringBuffer errorMsg = new StringBuffer();
         errorMsg.append(e);
         StackTraceElement[] trace = e.getStackTrace();
-        for (int i = 0; i < trace.length; i++)
+        for (int i = 0; i < trace.length; i++) {
             errorMsg.append("\n\tat " + trace[i]);
+        }
         Throwable ourCause = e.getCause();
-        if (ourCause != null)
+        if (ourCause != null) {
             errorMsg.append(getErrorCause(ourCause, trace));
+        }
         return errorMsg.toString();
     }
 
@@ -31,13 +33,16 @@ public class ErrorMsg {
         }
         int framesInCommon = trace.length - 1 - m;
         errorMsg.append("\nCaused by: \n" + ourCause);
-        for (int i = 0; i <= m; i++)
+        for (int i = 0; i <= m; i++) {
             errorMsg.append("\n\tat " + trace[i]);
-        if (framesInCommon != 0)
+        }
+        if (framesInCommon != 0) {
             errorMsg.append("\n\t... " + framesInCommon + " more");
+        }
         Throwable ourCause2 = ourCause.getCause();
-        if (ourCause2 != null)
+        if (ourCause2 != null) {
             errorMsg.append(getErrorCause(ourCause2, trace));
+        }
         return errorMsg.toString();
     }
 }

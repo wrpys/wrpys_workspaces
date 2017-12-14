@@ -50,21 +50,22 @@ public class WYUnCheckedException extends RuntimeException implements
             }
         }
     }
-
+    @Override
     public String getCode() {
         return this.code;
     }
-
+    @Override
     public String getMsg() {
         return this.message;
     }
-
+    @Override
     public String getStackTraceMsg() {
-        if (this.throwable == null)
+        if (this.throwable == null) {
             return message;
+        }
         return ErrorMsg.getErrorMsg(this.throwable);
     }
-
+    @Override
     public Throwable getThrowable() {
         return this.throwable;
     }

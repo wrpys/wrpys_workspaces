@@ -116,7 +116,9 @@ public class DateUtils {
      * @return
      */
     public static Date parseDate(String dateStr) {
-        if (dateStr == null || dateStr.equals("")) return null;
+        if (dateStr == null || "".equals(dateStr)) {
+            return null;
+        }
         try {
             Date date = getDateFormat(DATE_SIMP_FORMAT).parse(dateStr);
             return date;
@@ -139,7 +141,9 @@ public class DateUtils {
     }
 
     public static Date parseDateHour(String dateStr) {
-        if (dateStr == null || dateStr.equals("")) return null;
+        if (dateStr == null || "".equals(dateStr)) {
+            return null;
+        }
         try {
             Date date = getDateFormat(DATE_HOURS_FORMAT).parse(dateStr);
             return date;
@@ -155,7 +159,9 @@ public class DateUtils {
      * @return
      */
     public static Date parseDate(String dateStr, String dateFormat) {
-        if (dateStr == null || dateStr.equals("")) return null;
+        if (dateStr == null || "".equals(dateStr)) {
+            return null;
+        }
         try {
             Date date = getDateFormat(dateFormat).parse(dateStr);
             return date;
@@ -221,7 +227,9 @@ public class DateUtils {
      * @return
      */
     public static boolean checkExpired(String expiredDate) {
-        if (expiredDate == null || expiredDate.equals("") || expiredDate.equals("0")) return false;
+        if (expiredDate == null || "".equals(expiredDate) || "0".equals(expiredDate)) {
+            return false;
+        }
 
         Date expDate = DateUtils.parseDate(expiredDate);
         Date curDate = new Date();
@@ -246,8 +254,12 @@ public class DateUtils {
      * @return
      */
     public static boolean checkExpired(String inureDate, String expiredDate) {
-        if (inureDate == null || inureDate.equals("")) return false;
-        if (expiredDate == null || expiredDate.equals("")) return false;
+        if (inureDate == null || "".equals(inureDate)) {
+            return false;
+        }
+        if (expiredDate == null || "".equals(expiredDate)) {
+            return false;
+        }
 
         Date inuDate = DateUtils.parseDate(inureDate);
         Date expDate = DateUtils.parseDate(expiredDate);
@@ -301,8 +313,12 @@ public class DateUtils {
      * @return
      */
     public static boolean checkExpiredFull(String inureDate, String expiredDate) {
-        if (inureDate == null || inureDate.equals("")) return false;
-        if (expiredDate == null || expiredDate.equals("")) return false;
+        if (inureDate == null || "".equals(inureDate)) {
+            return false;
+        }
+        if (expiredDate == null || "".equals(expiredDate)) {
+            return false;
+        }
 
         Date inuDate = DateUtils.parseDateFull(inureDate);
         Date expDate = DateUtils.parseDateFull(expiredDate);
@@ -350,7 +366,9 @@ public class DateUtils {
     public static int getWeekDay() {
         Calendar cal = Calendar.getInstance();
         int ret = cal.get(Calendar.DAY_OF_WEEK) - 1;
-        if (ret == 0) ret = 7;
+        if (ret == 0) {
+            ret = 7;
+        }
         return ret;
     }
 
@@ -516,7 +534,9 @@ public class DateUtils {
      * @Description:  获取给定时间的月份数值，如果给定的日期为null，返回为null
      */
     public static Integer getMonth(Date date) {
-        if (date == null) return null;
+        if (date == null) {
+            return null;
+        }
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         return cal.get(Calendar.MONTH);
@@ -619,9 +639,15 @@ public class DateUtils {
             if (dd <= 7) {
                 dd = 4;
                 curdate.add(Calendar.MONTH, -1);
-            } else if (dd <= 14) dd = 1;
-            else if (dd <= 21) dd = 2;
-            else dd = 3;
+            } else if (dd <= 14) {
+                dd = 1;
+            }
+            else if (dd <= 21) {
+                dd = 2;
+            }
+            else {
+                dd = 3;
+            }
 
             d = curdate.getTime();
             tj_date = getDateFormat(DATE_MM_FORMAT).format(d) + "0" + String.valueOf(dd);
@@ -631,20 +657,26 @@ public class DateUtils {
             day = day - (Date_Bwtween % 4) + 1;
             int i = 0;
             while (1 > 0) {
-                if (day > 0) break;
+                if (day > 0) {
+                    break;
+                }
                 day += 4;
                 i++;
             }
             mm = mm - i - (Date_Bwtween / 4);
             i = 0;
             while (1 > 0) {
-                if (mm > 0) break;
+                if (mm > 0) {
+                    break;
+                }
                 mm += 12;
                 i++;
             }
             yyyy -= i;
             tj_date = String.valueOf(yyyy * 10000 + mm * 100 + day);
-            if (dd == 4) curdate.add(Calendar.MONTH, 1);
+            if (dd == 4) {
+                curdate.add(Calendar.MONTH, 1);
+            }
             curdate.add(Calendar.DATE, -1);
         } else if (circle_id == 21) {
             curdate.add(Calendar.DATE, 1);
@@ -665,7 +697,9 @@ public class DateUtils {
      * @Description:  针对时间对象做加法处理.  
      */
     public static long addTimeSec(long time, long sec) {
-        if (time == 0) return time;
+        if (time == 0) {
+            return time;
+        }
         return time + sec;
     }
 
@@ -677,7 +711,9 @@ public class DateUtils {
      * @Description:  针对时间对象加法处理  
      */
     public static long minusTimeMillcSec(long time1, long time2) {
-        if (time1 == 0) return 0;
+        if (time1 == 0) {
+            return 0;
+        }
         return time1 - time2;
     }
 
@@ -700,7 +736,9 @@ public class DateUtils {
      * @return
      */
     public static long minusTimeMillcSec(Date d1, Date d2) {
-        if (d1 == null || d2 == null) return 0;
+        if (d1 == null || d2 == null) {
+            return 0;
+        }
         return d1.getTime() - d2.getTime();
     }
 
@@ -775,7 +813,9 @@ public class DateUtils {
      * @Description:  清理date数据为YYYYMMDD (删除时、分、秒、毫秒)
      */
     public static Date cleanDateToDay(Date date) {
-        if (date == null) return null;
+        if (date == null) {
+            return null;
+        }
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);

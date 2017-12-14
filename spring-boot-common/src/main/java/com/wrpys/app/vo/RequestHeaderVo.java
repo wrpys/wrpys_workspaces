@@ -7,18 +7,33 @@ import java.io.Serializable;
 * 用户请求报文头
 *
 * @since 1.0.0-SNAPSHOT
-* @author Li Siqi
+* @author wrp
 */
 public class RequestHeaderVo  implements Serializable {
-
-	private String userToken;   // 用户令牌，每次登录的时候生成，登出时删除
-	private String requestSeq;  // 请求序列号
-	private String requestTime; // 请求时间，格式：’yyyymmddhh24miss’
-	private String reqSource;	//请求来源 web，service，app
-//	private String deviceId;    // 设备标识ID
-//	private String appId;       // 应用ID
-	private String appVersion;  // 版本号
-	private String userId;      // 用户ID，未登录则为空
+	/**
+	 * 用户令牌，每次登录的时候生成，登出时删除
+	 */
+	private String userToken;
+	/**
+	 * 请求序列号
+	 */
+	private String requestSeq;
+	/**
+	 * 请求时间，格式：’yyyymmddhh24miss’
+	 */
+	private String requestTime;
+	/**
+	 * 请求来源 web，service，app
+	 */
+	private String reqSource;
+	/**
+	 * 版本号
+	 */
+	private String appVersion;
+	/**
+	 * 用户ID，未登录则为空
+	 */
+	private String userId;
 
 	public String getUserToken() {
 		return userToken;

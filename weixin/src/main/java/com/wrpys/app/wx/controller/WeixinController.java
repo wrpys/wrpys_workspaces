@@ -51,7 +51,9 @@ public class WeixinController {
         if (CheckUtil.checkSignature(signature, timestamp, nonce, token)) {
             out.print(echostr);
         }
-        if (out != null) out.close();
+        if (out != null) {
+            out.close();
+        }
     }
 
     /**
@@ -73,7 +75,9 @@ public class WeixinController {
         // 响应消息
         PrintWriter out = response.getWriter();
         out.print(respMessage);
-        if (out != null) out.close();
+        if (out != null) {
+            out.close();
+        }
     }
 
 
