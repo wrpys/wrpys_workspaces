@@ -8,10 +8,10 @@ spring:
 eureka:
   instance:
     #prefer-ip-address: true
-    hostname: eureka-server1
+    hostname: server1
   client:
     service-url:
-      defaultZone: http://eureka-server2:8762/eureka/,http://eureka-server3:8763/eureka/
+      defaultZone: http://server2:8762/eureka/,http://server3:8763/eureka/
   server:
     enable-self-preservation: false
 

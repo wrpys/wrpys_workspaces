@@ -1,5 +1,5 @@
 server:
-  port: 8761
+  port: 8763
 
 spring:
   application:
@@ -8,10 +8,10 @@ spring:
 eureka:
   instance:
     #prefer-ip-address: true
-    hostname: eureka-server3
+    hostname: server3
   client:
     service-url:
-      defaultZone: http://eureka-server1:8761/eureka/,http://eureka-server2:8762/eureka/
+      defaultZone: http://server1:8761/eureka/,http://server2:8762/eureka/
   server:
     enable-self-preservation: false
 

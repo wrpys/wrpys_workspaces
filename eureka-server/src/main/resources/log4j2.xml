@@ -68,11 +68,11 @@
     </Appenders>
 
     <Loggers>
-        <Root level="debug">
+        <Root level="info">
             <AppenderRef ref="STDOUT"/>
             <AppenderRef ref="all"/>
         </Root>
-		<Logger name="com.wrpys" level="debug" includeLocation="false">
+		<Logger name="com.wrpys" level="info" includeLocation="false">
             <AppenderRef ref="allRolling"/>
             <AppenderRef ref="wrpys"/>
 			<AppenderRef ref="errorRolling"/>
